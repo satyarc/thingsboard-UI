@@ -278,10 +278,14 @@ function Menu(userService, $state, $rootScope) {
                 } else if (authority === 'CUSTOMER_USER') {
                     sections = [
                         {
-                            name: 'dashboard.dashboards',
+                            //name: 'dashboard.dashboards',
                             type: 'link',
-                            state: 'home.dashboards',
-                            icon: 'dashboard'
+                            //state: 'home.dashboards',
+                            //icon: 'dashboard'
+                            state: 'home.customers.dashboards.dashboard',
+                            name:  'dashboard.details',
+                            icon:  'dashboard'
+                                //    	state: 'home.dashboards'
                         }];
 
                     homeSections =
@@ -289,9 +293,12 @@ function Menu(userService, $state, $rootScope) {
                                 name: 'dashboard.view-dashboards',
                                 places: [
                                     {
-                                        name: 'dashboard.dashboards',
-                                        icon: 'dashboard',
-                                        state: 'home.dashboards'
+                                        //name: 'dashboard.dashboards',
+                                        //icon: 'dashboard',
+                                        //state: 'home.dashboards'
+                                    	    name: 'dashboard.details',
+                                            icon: 'dashboard',
+                                            state: 'home.customers.dashboards.dashboard'
                                     }
                                 ]
                             }];
