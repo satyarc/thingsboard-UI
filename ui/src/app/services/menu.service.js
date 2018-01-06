@@ -296,9 +296,9 @@ function Menu(userService, $state, $rootScope) {
                                         //name: 'dashboard.dashboards',
                                         //icon: 'dashboard',
                                         //state: 'home.dashboards'
-                                    	    name: 'dashboard.details',
-                                            icon: 'dashboard',
-                                            state: 'home.customers.dashboards.dashboard'
+                                    	name: 'dashboard.details',
+                                        icon: 'dashboard',
+                                        state: 'home.customers.dashboards.dashboard'
                                     }
                                 ]
                             }];
