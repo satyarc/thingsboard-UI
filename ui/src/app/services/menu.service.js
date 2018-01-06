@@ -293,11 +293,8 @@ function Menu(userService, $state, $rootScope) {
                                 name: 'dashboard.details',
                                 places: [
                                     {
-                                        //name: 'dashboard.dashboards',
-                                        //icon: 'dashboard',
-                                        //state: 'home.dashboards'
-                                    	name: 'dashboard.details',
-                                    	icon: 'dashboard',
+                                        name: 'dashboard.details',
+                                        icon: 'dashboard',
                                         state: 'home.customers.dashboards.dashboard'
                                     }
                                 ]
