@@ -290,7 +290,7 @@ function Menu(userService, $state, $rootScope) {
 
                     homeSections =
                         [{
-                                name: 'dashboard.view-dashboards',
+                                name: 'dashboard.details',
                                 places: [
                                     {
                                         //name: 'dashboard.dashboards',
