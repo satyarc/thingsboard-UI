@@ -297,7 +297,7 @@ function Menu(userService, $state, $rootScope) {
                                         //icon: 'dashboard',
                                         //state: 'home.dashboards'
                                     	name: 'dashboard.details',
-                                        icon: 'dashboard',
+                                    	icon: 'dashboard',
                                         state: 'home.customers.dashboards.dashboard'
                                     }
                                 ]
