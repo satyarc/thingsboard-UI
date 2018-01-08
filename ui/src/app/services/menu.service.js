@@ -31,13 +31,13 @@ function Menu(userService, $state, $rootScope) {
     }
 
     var authenticatedHandle = $rootScope.$on('authenticated', function () {
-    	 var user = userService.getCurrentUser();
-    	 authority = user.authority;
-         if (authority === 'CUSTOMER_USER'){
-        	 loadUserScreen();
-         }else{
-           	 buildMenu();
-         }
+    	var user = userService.getCurrentUser();
+    	authority = user.authority;
+		if (authority === 'CUSTOMER_USER'){
+			loadUserScreen();
+		}else{
+			buildMenu();
+		}
     });
 
     var service = {
