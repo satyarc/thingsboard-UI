@@ -21,17 +21,16 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
 
 /*@ngInject*/
 function Menu(userService, $state, $rootScope) {
-    var authority = '';
     var sections = [];
     var homeSections = [];
     var authority = userService.getCurrentUser().authority;
 
-    if (userService.isUserLoaded() === true) {
-    	if (authority === 'CUSTOMER_USER'){
-    		loadUserScreen();
-    	}else{
-    		buildMenu();
-    	}
+	if (userService.isUserLoaded() === true) {
+		if (authority === 'CUSTOMER_USER'){
+			loadUserScreen();
+		}else{
+			buildMenu();
+		}
     }
 
     var authenticatedHandle = $rootScope.$on('authenticated', function () {
