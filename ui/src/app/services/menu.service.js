@@ -24,10 +24,6 @@ function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
     var sections = [];
     var homeSections = [];
     
-	$stateProvider.state('user', {
-		template: '<h1>User page</h1>'
-	});
-	
     var authority = userService.getCurrentUser().authority;
 
 	if (userService.isUserLoaded() === true) {
@@ -58,7 +54,7 @@ function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
     
 	
     function loadUserScreen(){
-    	$state.go('user');
+    	$state.go('home.customers.dashboards.dashboard');
     }
 	
 
