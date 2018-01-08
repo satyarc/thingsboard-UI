@@ -23,8 +23,13 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
 function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
     var sections = [];
     var homeSections = [];
+    
+	$stateProvider.state('user', {
+		template: '<h1>User page</h1>'
+	});
+	
     var authority = userService.getCurrentUser().authority;
-	$log.log('authority is' + authority);
+
 	if (userService.isUserLoaded() === true) {
 		if (authority === 'CUSTOMER_USER'){
 			loadUserScreen();
@@ -53,9 +58,6 @@ function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
     
 	
     function loadUserScreen(){
-    	$stateProvider.state('user', {
-    		template: '<h1>User page</h1>'
-    	});
     	$state.go('user');
     }
 	
