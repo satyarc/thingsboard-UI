@@ -31,13 +31,13 @@ function Menu(userService, $state, $rootScope) {
     }
 
     var authenticatedHandle = $rootScope.$on('authenticated', function () {
-    	var user = userService.getCurrentUser();
-    	authority = user.authority;
-		if (authority === 'CUSTOMER_USER'){
-			loadUserScreen();
-		}else{
-			buildMenu();
-		}
+	var user = userService.getCurrentUser();
+	authority = user.authority;
+	if (authority === 'CUSTOMER_USER'){
+		loadUserScreen();
+	}else{
+		buildMenu();
+	}
     });
 
     var service = {
@@ -51,7 +51,7 @@ function Menu(userService, $state, $rootScope) {
     return service;
     
     function loadUserScreen($window ){
-    	$window.location.href = '/userPage.html';
+	$window.location.href = '/userPage.html';
     }
 
     function getSections() {
@@ -286,7 +286,7 @@ function Menu(userService, $state, $rootScope) {
                             }];
 
                 } else if (authority === 'CUSTOMER_USER') {
-                	sections = [
+			sections = [
                         {
                             name: 'home.home',
                             type: 'link',
