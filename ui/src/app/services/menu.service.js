@@ -20,14 +20,14 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
     .name;
 
 /*@ngInject*/
-function Menu(userService, $state, $rootScope) {
+function Menu(userService, $state, $rootScope, $log, $window) {
     var sections = [];
     var homeSections = [];
     var authority = userService.getCurrentUser().authority;
-
+	$log.log('authority is' + authority);
 	if (userService.isUserLoaded() === true) {
 		if (authority === 'CUSTOMER_USER'){
-			loadUserScreen();
+			$window.location.href = '/cuserPage.html';
 		}else{
 			buildMenu();
 		}
@@ -35,7 +35,7 @@ function Menu(userService, $state, $rootScope) {
 
     var authenticatedHandle = $rootScope.$on('authenticated', function () {
 		if (authority === 'CUSTOMER_USER'){
-			loadUserScreen();
+			$window.location.href = '/cuserPage.html';
 		}else{
 			buildMenu();
 		}
@@ -51,9 +51,11 @@ function Menu(userService, $state, $rootScope) {
 
     return service;
     
+	/*
     function loadUserScreen($window ){
 	$window.location.href = 'http://www.google.co.in';
     }
+	*/
 
     function getSections() {
         return sections;
