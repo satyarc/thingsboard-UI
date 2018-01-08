@@ -31,7 +31,13 @@ function Menu(userService, $state, $rootScope) {
     }
 
     var authenticatedHandle = $rootScope.$on('authenticated', function () {
-        buildMenu();
+    	 var user = userService.getCurrentUser();
+    	 authority = user.authority;
+         if (authority === 'CUSTOMER_USER'){
+        	 loadUserScreen();
+         }else{
+           	 buildMenu();
+         }
     });
 
     var service = {
@@ -43,6 +49,10 @@ function Menu(userService, $state, $rootScope) {
     }
 
     return service;
+    
+    function loadUserScreen($window ){
+    	$window.location.href = '/userPage.html';
+    }
 
     function getSections() {
         return sections;
@@ -276,29 +286,63 @@ function Menu(userService, $state, $rootScope) {
                             }];
 
                 } else if (authority === 'CUSTOMER_USER') {
-                    sections = [
+                	sections = [
                         {
-                            //name: 'dashboard.dashboards',
+                            name: 'home.home',
                             type: 'link',
-                            //state: 'home.dashboards',
-                            //icon: 'dashboard'
-                            state: 'home.customers.dashboards.dashboard',
-                            name:  'dashboard.details',
-                            icon:  'dashboard'
-                                //    	state: 'home.dashboards'
+                            state: 'home.links',
+                            icon: 'home'
+                        },
+                        {
+                            name: 'asset.assets',
+                            type: 'link',
+                            state: 'home.assets',
+                            icon: 'domain'
+                        },
+                        {
+                            name: 'device.devices',
+                            type: 'link',
+                            state: 'home.devices',
+                            icon: 'devices_other'
+                        },
+                        {
+                            name: 'dashboard.dashboards',
+                            type: 'link',
+                            state: 'home.dashboards',
+                            icon: 'dashboard'
                         }];
 
                     homeSections =
                         [{
-                                name: 'dashboard.details',
-                                places: [
-                                    {
-                                        name: 'dashboard.details',
-                                        icon: 'dashboard',
-                                        state: 'home.customers.dashboards.dashboard'
-                                    }
-                                ]
-                            }];
+                            name: 'asset.view-assets',
+                            places: [
+                                {
+                                    name: 'asset.assets',
+                                    icon: 'domain',
+                                    state: 'home.assets'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'device.view-devices',
+                            places: [
+                                {
+                                    name: 'device.devices',
+                                    icon: 'devices_other',
+                                    state: 'home.devices'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'dashboard.view-dashboards',
+                            places: [
+                                {
+                                    name: 'dashboard.dashboards',
+                                    icon: 'dashboard',
+                                    state: 'home.dashboards'
+                                }
+                            ]
+                        }];
                 }
             }
         }
