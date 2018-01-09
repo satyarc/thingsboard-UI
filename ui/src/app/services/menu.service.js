@@ -310,26 +310,6 @@ function Menu(userService, $state, $rootScope) {
 
                     homeSections =
                         [{
-                            name: 'asset.view-assets',
-                            places: [
-                                {
-                                    name: 'asset.assets',
-                                    icon: 'domain',
-                                    state: 'home.assets'
-                                }
-                            ]
-                        },
-                        {
-                            name: 'device.view-devices',
-                            places: [
-                                {
-                                    name: 'device.devices',
-                                    icon: 'devices_other',
-                                    state: 'home.devices'
-                                }
-                            ]
-                        },
-                        {
                             name: 'dashboard.view-dashboards',
                             places: [
                                 {

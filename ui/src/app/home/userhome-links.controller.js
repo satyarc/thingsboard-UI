@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 /*@ngInject*/
-export default function UserHomeLinksController() {
-	
+export default function UserHomeLinksController(menu) {
+	var vm = this;
+	vm.model = menu.getHomeSections();
 }
