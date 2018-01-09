@@ -27,19 +27,11 @@ function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
     var authority = userService.getCurrentUser().authority;
 
 	if (userService.isUserLoaded() === true) {
-		if (authority === 'CUSTOMER_USER'){
-			loadUserScreen();
-		}else{
 			buildMenu();
-		}
     }
 
     var authenticatedHandle = $rootScope.$on('authenticated', function () {
-		if (authority === 'CUSTOMER_USER'){
-			loadUserScreen();
-		}else{
 			buildMenu();
-		}
     });
 
     var service = {

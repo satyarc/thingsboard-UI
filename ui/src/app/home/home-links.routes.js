@@ -16,6 +16,7 @@
 /* eslint-disable import/no-unresolved, import/default */
 
 import homeLinksTemplate from './home-links.tpl.html';
+import dashboardTemplate from './dashboard.tpl.html';
 
 /* eslint-enable import/no-unresolved, import/default */
 
@@ -26,7 +27,7 @@ export default function HomeLinksRoutes($stateProvider) {
         .state('home.links', {
             url: '/home',
             module: 'private',
-            auth: ['SYS_ADMIN', 'TENANT_ADMIN', 'CUSTOMER_USER'],
+            auth: ['SYS_ADMIN', 'TENANT_ADMIN'],
             views: {
                 "content@home": {
                     templateUrl: homeLinksTemplate,
@@ -40,6 +41,26 @@ export default function HomeLinksRoutes($stateProvider) {
             ncyBreadcrumb: {
                 label: '{"icon": "home", "label": "home.home"}',
                 icon: 'home'
+            }
+        })
+        .state('home.customers.dashboards.dashboard', {
+            url: '/home',
+            reloadOnSearch: false,
+            module: 'private',
+            auth: ['CUSTOMER_USER'],
+            views: {
+                "content@home": {
+                    templateUrl: dashboardTemplate,
+                    controller: 'DashboardController',
+                    controllerAs: 'vm'
+                }
+            },
+            data: {
+                searchEnabled: false,
+                pageTitle: 'customer.dashboard'
+            },
+            ncyBreadcrumb: {
+                label: '{"icon": "dashboard", "label": "customer.dashboard"}'
             }
         });
 }
