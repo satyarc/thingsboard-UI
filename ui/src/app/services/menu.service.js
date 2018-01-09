@@ -290,18 +290,6 @@ function Menu(userService, $state, $rootScope) {
                             icon: 'home'
                         },
                         {
-                            name: 'asset.assets',
-                            type: 'link',
-                            state: 'home.assets',
-                            icon: 'domain'
-                        },
-                        {
-                            name: 'device.devices',
-                            type: 'link',
-                            state: 'home.devices',
-                            icon: 'devices_other'
-                        },
-                        {
                             name: 'dashboard.dashboards',
                             type: 'link',
                             state: 'home.dashboards',

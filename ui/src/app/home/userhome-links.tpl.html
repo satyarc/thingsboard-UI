@@ -15,6 +15,8 @@
     limitations under the License.
 
 -->
-<p>
-	USER PAGE
-</p>
+<md-grid-list md-cols="2" md-cols-gt-sm="4" md-row-height="280px">
+	<md-grid-tile md-colspan="2" md-colspan-gt-sm="{{section.places.length}}" ng-repeat="section in vm.model">
+		<span translate class="md-headline">{{ section.name }}</span>
+	</md-grid-tile>
+</md-grid-list>
