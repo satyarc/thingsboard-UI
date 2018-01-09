@@ -20,7 +20,7 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
     .name;
 
 /*@ngInject*/
-function Menu(userService, $state, $rootScope, $log) {
+function Menu(userService, $state, $rootScope) {
     var sections = [];
     var homeSections = [];
     
