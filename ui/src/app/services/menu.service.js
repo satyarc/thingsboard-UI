@@ -20,7 +20,7 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
     .name;
 
 /*@ngInject*/
-function Menu(userService, $state, $rootScope, deviceService, $log) {
+function Menu(userService, $state, $rootScope, deviceService) {
     var sections = [];
     var homeSections = [];
     
@@ -53,7 +53,7 @@ function Menu(userService, $state, $rootScope, deviceService, $log) {
     }
     
     
-    function buildMenu() {
+    function buildMenu($window) {
         var user = userService.getCurrentUser();
         if (user) {
             if (authority !== user.authority) {
@@ -277,9 +277,8 @@ function Menu(userService, $state, $rootScope, deviceService, $log) {
                             }];
 
                 } else if (authority === 'CUSTOMER_USER') {
-                	
-                	 sections = [
-                        {
+			sections = [
+			{
                             name: 'dashboard.dashboards',
                             type: 'link',
                             state: 'home.dashboards',
@@ -298,11 +297,8 @@ function Menu(userService, $state, $rootScope, deviceService, $log) {
                             ]
                         }];
                        
-                	
-                	var devices = deviceService.getCustomerDevices(userService.getCurrentUser().customerId, null, true, null, null);
-                	$log.log(devices);
-                	
-                	
+		var devices = deviceService.getCustomerDevices(userService.getCurrentUser().customerId, null, true, null, null);
+	$window.alert(devices);
                 }
             }
         }
