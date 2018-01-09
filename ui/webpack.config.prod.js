@@ -42,12 +42,12 @@ module.exports = {
             moment: "moment"
         }),
         new CopyWebpackPlugin([
-            {from: './src/thingsboard.ico', to: 'thingsboard.ico'}
+            {from: './src/intellipredikt.ico', to: 'intellipredikt.ico'}
         ]),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: '../index.html',
-            title: 'ThingsBoard',
+            title: 'Intellipredikt',
             inject: 'body',
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
