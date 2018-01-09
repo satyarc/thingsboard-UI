@@ -14,7 +14,28 @@
  * limitations under the License.
  */
 /*@ngInject*/
-export default function UserHomeLinksController(menu) {
+export default function UserHomeLinksController(deviceService) {
 	var vm = this;
-	vm.model = menu.getHomeSections();
+	//vm.model = menu.getHomeSections();
+	sections = [
+        {
+            name: 'device1',
+            type: 'link',
+            state: 'home.dashboards',
+            icon: 'dashboard'
+        },
+        {
+            name: 'device2',
+            type: 'link',
+            state: 'home.dashboards',
+            icon: 'dashboard'
+        },
+        {
+            name: 'device3',
+            type: 'link',
+            state: 'home.dashboards',
+            icon: 'dashboard'
+        }];
+	
+	vm.model = sections;
 }
