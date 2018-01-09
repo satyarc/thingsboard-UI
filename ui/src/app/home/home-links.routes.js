@@ -26,7 +26,7 @@ export default function HomeLinksRoutes($stateProvider) {
         .state('home.links', {
             url: '/home',
             module: 'private',
-            auth: ['SYS_ADMIN', 'TENANT_ADMIN'],
+            auth: ['SYS_ADMIN', 'TENANT_ADMIN','CUSTOMER_USER'],
             views: {
                 "content@home": {
                     templateUrl: homeLinksTemplate,
@@ -43,14 +43,14 @@ export default function HomeLinksRoutes($stateProvider) {
             }
         })
         .state('userhome.links', {
-            url: '/home',
+            url: '/userhome',
             module: 'private',
             auth: ['CUSTOMER_USER'],
             views: {
                 "content@home": {
                     templateUrl: userhomeLinksTemplate,
                     controllerAs: 'vm',
-                    controller: 'HomeLinksController'
+                    controller: 'UserHomeLinksController'
                 }
             },
             data: {
