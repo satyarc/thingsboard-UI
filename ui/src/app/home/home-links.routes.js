@@ -16,13 +16,12 @@
 /* eslint-disable import/no-unresolved, import/default */
 
 import homeLinksTemplate from './home-links.tpl.html';
-import dashboardTemplate from './dashboard.tpl.html';
+import userhomeLinksTemplate from './userhome-links.tpl.html';
 
 /* eslint-enable import/no-unresolved, import/default */
 
 /*@ngInject*/
 export default function HomeLinksRoutes($stateProvider) {
-
     $stateProvider
         .state('home.links', {
             url: '/home',
@@ -43,24 +42,23 @@ export default function HomeLinksRoutes($stateProvider) {
                 icon: 'home'
             }
         })
-        .state('home.customers.dashboards.dashboard', {
+        .state('userhome.links', {
             url: '/home',
-            reloadOnSearch: false,
             module: 'private',
             auth: ['CUSTOMER_USER'],
             views: {
                 "content@home": {
-                    templateUrl: dashboardTemplate,
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
+                    templateUrl: userhomeLinksTemplate,
+                    controllerAs: 'vm',
+                    controller: 'HomeLinksController'
                 }
             },
             data: {
-                searchEnabled: false,
-                pageTitle: 'customer.dashboard'
+                pageTitle: 'home.home'
             },
             ncyBreadcrumb: {
-                label: '{"icon": "dashboard", "label": "customer.dashboard"}'
+                label: '{"icon": "home", "label": "home.home"}',
+                icon: 'home'
             }
         });
 }
