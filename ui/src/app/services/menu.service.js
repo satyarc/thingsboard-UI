@@ -43,13 +43,7 @@ function Menu(userService, $state, $rootScope) {
     }
 
     return service;
-    
-	/*
-    function loadUserScreen(){
-    	$state.go('home.customers.dashboards.dashboard');
-    }
-    */
-	
+
     function getSections() {
         return sections;
     }
@@ -283,12 +277,6 @@ function Menu(userService, $state, $rootScope) {
 
                 } else if (authority === 'CUSTOMER_USER') {
 			sections = [
-                        {
-                            name: 'home.home',
-                            type: 'link',
-                            state: 'home.links',
-                            icon: 'home'
-                        },
                         {
                             name: 'dashboard.dashboards',
                             type: 'link',

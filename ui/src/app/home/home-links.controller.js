@@ -17,7 +17,7 @@
 export default function HomeLinksController($scope,menu,userService,$state) {
 	var authority = userService.getCurrentUser().authority;
 	if (authority === 'CUSTOMER_USER'){
-		$state.go('userhome.links')
+		$state.go('userhome.links');
 	}else{
 		var vm = this;
 		vm.model = menu.getHomeSections();
