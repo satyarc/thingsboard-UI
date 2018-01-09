@@ -20,7 +20,7 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
     .name;
 
 /*@ngInject*/
-function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
+function Menu(userService, $state, $rootScope, $log) {
     var sections = [];
     var homeSections = [];
     
@@ -44,12 +44,12 @@ function Menu(userService, $state, $rootScope, $log, $window, $stateProvider) {
 
     return service;
     
-	
+	/*
     function loadUserScreen(){
     	$state.go('home.customers.dashboards.dashboard');
     }
+    */
 	
-
     function getSections() {
         return sections;
     }
