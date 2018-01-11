@@ -129,7 +129,7 @@ export default function AppRun($rootScope, $window, $injector, $location, $log, 
             }
         })
 
-        $rootScope.pageTitle = 'ThingsBoard';
+        $rootScope.pageTitle = 'Intellipredikt';
 
         $rootScope.stateChangeSuccessHandle = $rootScope.$on('$stateChangeSuccess', function (evt, to, params) {
             if (userService.isPublic() && to.name === 'home.dashboards.dashboard') {
@@ -138,9 +138,9 @@ export default function AppRun($rootScope, $window, $injector, $location, $log, 
             }
             if (angular.isDefined(to.data.pageTitle)) {
                 $translate(to.data.pageTitle).then(function (translation) {
-                    $rootScope.pageTitle = 'ThingsBoard | ' + translation;
+                    $rootScope.pageTitle = 'Intellipredikt | ' + translation;
                 }, function (translationId) {
-                    $rootScope.pageTitle = 'ThingsBoard | ' + translationId;
+                    $rootScope.pageTitle = 'Intellipredikt | ' + translationId;
                 });
             }
         })

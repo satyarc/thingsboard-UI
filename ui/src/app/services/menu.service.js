@@ -284,9 +284,9 @@ function Menu(userService, $state, $rootScope,deviceService) {
 					var deviceNames = [];
 					
 					for(var userDevice in userDevices){
-						deviceNames.push({name: 'userDevice',
+						deviceNames.push({name: userDevice,
 											type:'link',
-											state:userDevice,
+											state:'home.devices',
 											icon:'devices_other'});
 					}
 					
