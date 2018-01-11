@@ -285,11 +285,19 @@ function Menu(userService, $state, $rootScope,deviceService) {
 					/*var fetchDevicesFunction = function (pageLink, deviceType) {
 						return deviceService.getCustomerDevices(user.customerId, pageLink, true, null, deviceType);
 					};
-					var userDevices = fetchDevicesFunction;*/
+					var userDevices = fetchDevicesFunction;
+					
+					{
+   						"status": 401,
+   						"message": "Authentication failed",
+   						"errorCode": 10,
+   						"timestamp": 1515688292012
+					}
+					*/
 					
 					var deviceNames = [];
 					for(var userDevice in userDevices){
-						deviceNames.push({name: userDevice,
+						deviceNames.push({name: angular.toJson(userDevices[userDevice]),
 											type:'link',
 											state:'home.devices',
 											icon:'devices_other'});
