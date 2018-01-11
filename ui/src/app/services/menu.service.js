@@ -281,14 +281,20 @@ function Menu(userService, $state, $rootScope,deviceService) {
 					var config = {};
 					var type = {};
 					var userDevices = deviceService.getCustomerDevices(user.customerId, pageLink, true, config, type);
-					var deviceNames = [];
+				
+					/*var fetchDevicesFunction = function (pageLink, deviceType) {
+						return deviceService.getCustomerDevices(user.customerId, pageLink, true, null, deviceType);
+					};
+					var userDevices = fetchDevicesFunction;*/
 					
+					var deviceNames = [];
 					for(var userDevice in userDevices){
 						deviceNames.push({name: userDevice,
 											type:'link',
 											state:'home.devices',
 											icon:'devices_other'});
 					}
+					
 					
 					/*
 					sections = [
