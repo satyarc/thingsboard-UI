@@ -20,7 +20,7 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
     .name;
 
 /*@ngInject*/
-function Menu(userService, $state, $rootScope, deviceService) {
+function Menu(userService, $state, $rootScope,deviceService) {
     var sections = [];
     var homeSections = [];
     
@@ -53,7 +53,7 @@ function Menu(userService, $state, $rootScope, deviceService) {
     }
     
     
-    function buildMenu($window) {
+    function buildMenu() {
         var user = userService.getCurrentUser();
         if (user) {
             if (authority !== user.authority) {
@@ -277,14 +277,29 @@ function Menu(userService, $state, $rootScope, deviceService) {
                             }];
 
                 } else if (authority === 'CUSTOMER_USER') {
-			sections = [
-			{
-                            name: 'dashboard.dashboards',
-                            type: 'link',
-                            state: 'home.dashboards',
-                            icon: 'dashboard'
-                        }];
-
+					var pageLink = {limit: '', textSearch: ''};
+					var config = {};
+					var type = {};
+					var userDevices = deviceService.getCustomerDevices(user.customerId, pageLink, true, config, type);
+					var deviceNames = [];
+					
+					for(var userDevice in userDevices){
+						deviceNames.push({name: 'userDevice',
+											type:'link',
+											state:userDevice,
+											icon:'devices_other'});
+					}
+					
+					/*
+					sections = [
+						{
+					        name: 'device.devices',
+					        type: 'link',
+					        state: 'home.dashboards',
+					        icon: 'dashboard'
+					    }];
+					    */
+					sections = deviceNames; 
                     homeSections =
                         [{
                             name: 'dashboard.view-dashboards',
@@ -296,9 +311,6 @@ function Menu(userService, $state, $rootScope, deviceService) {
                                 }
                             ]
                         }];
-                       
-		var devices = deviceService.getCustomerDevices(userService.getCurrentUser().customerId, null, true, null, null);
-	$window.alert(devices);
                 }
             }
         }

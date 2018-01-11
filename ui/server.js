@@ -27,7 +27,8 @@ const config = require('./webpack.config');
 const express = require('express');
 const http = require('http');
 const httpProxy = require('http-proxy');
-const forwardHost = 'localhost';
+//const forwardHost = 'localhost';
+const forwardHost = '169.44.138.58'
 const forwardPort = 8080;
 
 const app = express();

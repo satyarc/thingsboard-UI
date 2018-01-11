@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 /*@ngInject*/
-export default function HomeLinksController($scope,menu,userService,$state) {
-	var authority = userService.getCurrentUser().authority;
-	if (authority === 'CUSTOMER_USER'){
-		$state.go('userhome.links');
-	}else{
-		var vm = this;
-		vm.model = menu.getHomeSections();
-	}
+export default function HomeLinksController($scope,menu) {
+	var vm = this;
+	vm.model = menu.getHomeSections();
 }

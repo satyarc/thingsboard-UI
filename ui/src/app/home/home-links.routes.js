@@ -16,7 +16,6 @@
 /* eslint-disable import/no-unresolved, import/default */
 
 import homeLinksTemplate from './home-links.tpl.html';
-import userhomeLinksTemplate from './userhome-links.tpl.html';
 
 /* eslint-enable import/no-unresolved, import/default */
 
@@ -32,25 +31,6 @@ export default function HomeLinksRoutes($stateProvider) {
                     templateUrl: homeLinksTemplate,
                     controllerAs: 'vm',
                     controller: 'HomeLinksController'
-                }
-            },
-            data: {
-                pageTitle: 'home.home'
-            },
-            ncyBreadcrumb: {
-                label: '{"icon": "home", "label": "home.home"}',
-                icon: 'home'
-            }
-        })
-        .state('userhome.links', {
-            url: '/userhome',
-            module: 'private',
-            auth: ['CUSTOMER_USER'],
-            views: {
-                "content@home": {
-                    templateUrl: userhomeLinksTemplate,
-                    controllerAs: 'vm',
-                    controller: 'UserHomeLinksController'
                 }
             },
             data: {
