@@ -20,7 +20,7 @@ export default angular.module('thingsboard.menu', [thingsboardApiUser])
     .name;
 
 /*@ngInject*/
-function Menu(userService, $state, $rootScope,deviceService) {
+function Menu(userService, $state, $rootScope) {
     var sections = [];
     var homeSections = [];
     
@@ -277,43 +277,14 @@ function Menu(userService, $state, $rootScope,deviceService) {
                             }];
 
                 } else if (authority === 'CUSTOMER_USER') {
-					var pageLink = {limit: '', textSearch: ''};
-					var config = {};
-					var type = {};
-					var userDevices = deviceService.getCustomerDevices(user.customerId, pageLink, true, config, type);
-				
-					/*var fetchDevicesFunction = function (pageLink, deviceType) {
-						return deviceService.getCustomerDevices(user.customerId, pageLink, true, null, deviceType);
-					};
-					var userDevices = fetchDevicesFunction;
-					
-					{
-   						"status": 401,
-   						"message": "Authentication failed",
-   						"errorCode": 10,
-   						"timestamp": 1515688292012
-					}
-					*/
-					
-					var deviceNames = [];
-					for(var userDevice in userDevices){
-						deviceNames.push({name: angular.toJson(userDevices[userDevice]),
-											type:'link',
-											state:'home.devices',
-											icon:'devices_other'});
-					}
-					
-					
-					/*
 					sections = [
 						{
-					        name: 'device.devices',
-					        type: 'link',
-					        state: 'home.dashboards',
-					        icon: 'dashboard'
-					    }];
-					    */
-					sections = deviceNames; 
+							name: 'dashboard.dashboards',
+							type: 'link',
+							state: 'home.dashboards',
+							icon: 'dashboard'
+						}];
+
                     homeSections =
                         [{
                             name: 'dashboard.view-dashboards',
