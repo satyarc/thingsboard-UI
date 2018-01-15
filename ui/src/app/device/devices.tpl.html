@@ -15,8 +15,17 @@
     limitations under the License.
 
 -->
+
+<ul flex layout="column" layout-align="start stretch" class="tb-side-menu">
+	   	  <li ng-repeat="device in vm.grid.refreshList()" class="parent-list-item" 
+		      				ng-class="{'parentActive' : isOpen(device)}"> 
+				<tb-menu-link section="device"></tb-menu-link>
+	      </li>
+</ul>
+
 <tb-grid grid-configuration="vm.deviceGridConfig">
-    <details-buttons tb-help="'devices'" help-container-id="help-container">
+	
+	<details-buttons tb-help="'devices'" help-container-id="help-container">
         <div id="help-container"></div>
     </details-buttons>
     <md-tabs ng-class="{'tb-headless': vm.grid.detailsConfig.isDetailsEditMode}"

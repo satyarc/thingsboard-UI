@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import uiRouter from 'angular-ui-router';
-
-import HomeLinksRoutes from './home-links.routes';
-import HomeLinksController from './home-links.controller';
-import UserHomeLinksController from './userhome-links.controller';
-
-import thingsboardApiUser from '../api/user.service';
-
-export default angular.module('thingsboard.homeLinks', [
-    uiRouter,thingsboardApiUser
-])
-    .config(HomeLinksRoutes)
-    .controller('HomeLinksController', HomeLinksController)
-    .controller('UserHomeLinksController', UserHomeLinksController)
-    .name;
+/*@ngInject*/
+export default function UserHomeLinksController() {
+	var vm = this;
+	vm.model = [{"dashboardIndex":"dashboard1"},
+		{"dashboardIndex":"dashboard2"},
+		{"dashboardIndex":"dashboard3"},
+		{"dashboardIndex":"dashboard4"},
+		{"dashboardIndex":"dashboard5"},
+		{"dashboardIndex":"dashboard6"}];
+}

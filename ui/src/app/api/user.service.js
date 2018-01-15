@@ -487,8 +487,7 @@ function UserService($http, $q, $rootScope, adminService, dashboardService, logi
 
     function gotoDefaultPlace(params) {
         if (currentUser && isAuthenticated()) {
-            var place = 'home.links';
-
+        var place = 'home.links';
             if (currentUser.authority === 'TENANT_ADMIN' || currentUser.authority === 'CUSTOMER_USER') {
                 if (userHasDefaultDashboard()) {
                     place = 'home.dashboards.dashboard';

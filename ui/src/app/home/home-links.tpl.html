@@ -14,7 +14,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-
+-->
 <md-grid-list md-cols="2" md-cols-gt-sm="4" md-row-height="280px">
 	<md-grid-tile md-colspan="2" md-colspan-gt-sm="{{section.places.length}}" ng-repeat="section in vm.model">
 		<md-card style='width: 100%;'>
@@ -37,33 +37,3 @@
 	</md-grid-tile>
 </md-grid-list>
 
--->
-
-<md-content>
-    <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="Details">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Details</h1>
-          <p>Device details</p>
-        </md-content>
-      </md-tab>
-      <md-tab label="Attributes">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Attributes</h1>
-          <p>Device attributes</p>
-        </md-content>
-      </md-tab>
-      <md-tab label="Alarms">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Alarms</h1>
-          <p>Device Alarms</p>
-        </md-content>
-      </md-tab>
-      <md-tab label="Events">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Events</h1>
-          <p>Device Events</p>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
