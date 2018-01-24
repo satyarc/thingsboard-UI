@@ -42,42 +42,39 @@ export default function UserHomeLinksController(userService, dashboardService, c
     }
 
     vm.dashboardsScope = $state.$current.data.dashboardsType;
-    initController();
-    function initController() {
-        var fetchDashboardsFunction = null;
-        var deleteDashboardFunction = null;
-        var refreshDashboardsParamsFunction = null;
+    var fetchDashboardsFunction = null;
+    var deleteDashboardFunction = null;
+    var refreshDashboardsParamsFunction = null;
 
-        var user = userService.getCurrentUser();
+    var user = userService.getCurrentUser();
 
-        if (user.authority === 'CUSTOMER_USER') {
-            vm.dashboardsScope = 'customer_user';
-            customerId = user.customerId;
-        }
-
-        if (customerId) {
-            vm.customerDashboardsTitle = $translate.instant('customer.dashboards');
-            customerService.getShortCustomerInfo(customerId).then(
-                function success(info) {
-                    if (info.isPublic) {
-                        vm.customerDashboardsTitle = $translate.instant('customer.public-dashboards');
-                    }
-                }
-            );
-        }
-
-        fetchDashboardsFunction = function (pageLink) {
-            return dashboardService.getCustomerDashboards(customerId, pageLink);
-        };
-
-        refreshDashboardsParamsFunction = function () {
-            return {"customerId": customerId, "topIndex": vm.topIndex};
-        };
-
-        vm.dashboardGridConfig.refreshParamsFunc = refreshDashboardsParamsFunction;
-        vm.dashboardGridConfig.fetchItemsFunc = fetchDashboardsFunction;
-        vm.dashboardGridConfig.deleteItemFunc = deleteDashboardFunction;
+    if (user.authority === 'CUSTOMER_USER') {
+        vm.dashboardsScope = 'customer_user';
+        customerId = user.customerId;
     }
+
+    if (customerId) {
+        vm.customerDashboardsTitle = $translate.instant('customer.dashboards');
+        customerService.getShortCustomerInfo(customerId).then(
+            function success(info) {
+                if (info.isPublic) {
+                    vm.customerDashboardsTitle = $translate.instant('customer.public-dashboards');
+                }
+            }
+        );
+    }
+
+    fetchDashboardsFunction = function (pageLink) {
+        return dashboardService.getCustomerDashboards(customerId, pageLink);
+    };
+
+    refreshDashboardsParamsFunction = function () {
+        return {"customerId": customerId, "topIndex": vm.topIndex};
+    };
+
+    vm.dashboardGridConfig.refreshParamsFunc = refreshDashboardsParamsFunction;
+    vm.dashboardGridConfig.fetchItemsFunc = fetchDashboardsFunction;
+    vm.dashboardGridConfig.deleteItemFunc = deleteDashboardFunction;
     
     function loadDashboard(dashboard) {
         return dashboardService.getDashboard(dashboard.id.id);
