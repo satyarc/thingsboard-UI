@@ -283,18 +283,6 @@ function Menu(userService, $state, $rootScope) {
                             type: 'link',
                             state: 'home.userlinks',
                             icon: 'home'
-                        },
-						{
-							name: 'dashboard.dashboards',
-							type: 'link',
-							state: 'home.dashboards',
-							icon: 'dashboard'
-						},
-                        {
-                            name: 'device.devices',
-                            type: 'link',
-                            state: 'home.devices',
-                            icon: 'devices_other'
                         }];
 
                     homeSections =

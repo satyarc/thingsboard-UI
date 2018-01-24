@@ -13,17 +13,7 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
--->
-
-<md-content>
-    <md-tabs md-dynamic-height="" md-border-bottom="">
-    <h1 class="md-display-2">User home</h1>
-      <md-tab label="{{ section.dashboardIndex }}" ng-repeat="section in vm.model">
-        <md-content class="md-padding" >
-          <h1 class="md-display-2">{{ section.dashboardIndex }}</h1>
-          <p>{{ section.dashboardIndex }}</p>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+  -->
+<tb-grid grid-configuration="vm.dashboardGridConfig">
+	
+</tb-grid>
