@@ -15,9 +15,8 @@
  */
 
 /*@ngInject*/
-export default function UserHomeLinksController(userService, dashboardService, customerService, importExport, types,
-                                             $state, $stateParams, $mdDialog, $document, $q, $translate) {
-    var customerId = $stateParams.customerId;
+export default function UserHomeLinksController(userService, dashboardService, customerService, types,
+                                             $state, $stateParams, $translate) {
     var vm = this;
     vm.types = types;
 
@@ -28,9 +27,6 @@ export default function UserHomeLinksController(userService, dashboardService, c
         parentCtl: vm,
         onGridInited: gridInited,
         noItemsText: function() { return $translate.instant('dashboard.no-dashboards-text') },
-        itemDetailsText: function() { return $translate.instant('dashboard.dashboard-details') },
-        isDetailsReadOnly: function () { return vm.dashboardsScope === 'customer_user';},
-        isSelectionEnabled: function () { return !(vm.dashboardsScope === 'customer_user');}
     };
 
     if (angular.isDefined($stateParams.items) && $stateParams.items !== null) {
@@ -42,17 +38,11 @@ export default function UserHomeLinksController(userService, dashboardService, c
     }
 
     vm.dashboardsScope = $state.$current.data.dashboardsType;
-    var fetchDashboardsFunction = null;
-    var deleteDashboardFunction = null;
-    var refreshDashboardsParamsFunction = null;
-
     var user = userService.getCurrentUser();
 
-    if (user.authority === 'CUSTOMER_USER') {
-        vm.dashboardsScope = 'customer_user';
-        customerId = user.customerId;
-    }
-
+    vm.dashboardsScope = 'customer_user';
+    var customerId = user.customerId;
+    
     if (customerId) {
         vm.customerDashboardsTitle = $translate.instant('customer.dashboards');
         customerService.getShortCustomerInfo(customerId).then(
@@ -64,17 +54,16 @@ export default function UserHomeLinksController(userService, dashboardService, c
         );
     }
 
-    fetchDashboardsFunction = function (pageLink) {
+    var fetchDashboardsFunction = function (pageLink) {
         return dashboardService.getCustomerDashboards(customerId, pageLink);
     };
 
-    refreshDashboardsParamsFunction = function () {
+    var refreshDashboardsParamsFunction = function () {
         return {"customerId": customerId, "topIndex": vm.topIndex};
     };
 
     vm.dashboardGridConfig.refreshParamsFunc = refreshDashboardsParamsFunction;
     vm.dashboardGridConfig.fetchItemsFunc = fetchDashboardsFunction;
-    vm.dashboardGridConfig.deleteItemFunc = deleteDashboardFunction;
     
     function loadDashboard(dashboard) {
         return dashboardService.getDashboard(dashboard.id.id);
