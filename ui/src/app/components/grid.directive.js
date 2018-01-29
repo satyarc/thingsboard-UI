@@ -22,12 +22,14 @@ import thingsboardDetailsSidenav from './details-sidenav.directive';
 
 import gridTemplate from './grid.tpl.html';
 import usergridTemplate from './usergrid.tpl.html';
+import usermenugridTemplate from './usermenugrid.tpl.html';
 
 /* eslint-enable import/no-unresolved, import/default */
 
 export default angular.module('thingsboard.directives.grid', [thingsboardScopeElement, thingsboardDetailsSidenav])
     .directive('tbGrid', Grid)
     .directive('tbUserGrid', UserGrid)
+    .directive('tbUserMenuGrid', UserMenuGrid)
     .controller('AddItemController', AddItemController)
     .controller('ItemCardController', ItemCardController)
     .directive('tbGridCardContent', GridCardContent)
@@ -135,6 +137,20 @@ function UserGrid() {
         controller: GridController,
         controllerAs: 'vm',
         templateUrl: usergridTemplate
+    }
+}
+
+/*@ngInject*/
+function UserMenuGrid() {
+    return {
+        restrict: "E",
+        scope: true,
+        bindToController: {
+            gridConfiguration: '&?'
+        },
+        controller: GridController,
+        controllerAs: 'vm',
+        templateUrl: usermenugridTemplate
     }
 }
 
