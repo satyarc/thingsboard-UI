@@ -34,9 +34,13 @@
 	  <md-toolbar ng-show="vm.isAdministrator()" flex class="tb-side-menu-toolbar" role="navigation">
 		  <tb-side-menu></tb-side-menu> 
 	  </md-toolbar>
+	    
 	  <md-toolbar ng-show="vm.isCustomerUser()" flex class="tb-side-menu-toolbar" role="navigation"> 
-		  <!--<tb-user-grid grid-configuration="vm.deviceGridConfig"></tb-user-grid> -->
 		  <tb-user-grid grid-configuration="vm.assetGridConfig"></tb-user-grid>  
+	  </md-toolbar>
+	  
+	  <md-toolbar ng-show="vm.isCustomerUser()" flex class="tb-side-menu-toolbar" role="navigation"> 
+		  <tb-user-grid grid-configuration="vm.deviceGridConfig"></tb-user-grid> 
 	  </md-toolbar>
   </md-sidenav>
 

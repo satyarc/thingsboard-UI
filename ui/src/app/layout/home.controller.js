@@ -45,22 +45,20 @@ export default function HomeController(types, loginService, userService, deviceS
     
 	if(authority === 'CUSTOMER_USER'){
 		
+		vm.topIndex = 0;
+		
 		vm.deviceGridConfig = {
 			getItemTitleFunc: getDeviceTitle,
 			parentCtl: vm,
 			onGridInited: gridInited,
-			noItemsText: function() { return $translate.instant('device.no-devices-text') },
-			refreshParamsFunc:refreshDevicesParamsFunction,
-			fetchItemsFunc:fetchDevicesFunction
+			noItemsText: function() { return $translate.instant('device.no-devices-text') }
 		};
 		
 		vm.assetGridConfig = {
 			getItemTitleFunc: getAssetTitle,
 			parentCtl: vm,
 			onGridInited: gridInited,
-			noItemsText: function() { return $translate.instant('asset.no-assets-text') },
-			refreshParamsFunc:refreshAssetsParamsFunction,
-			fetchItemsFunc:fetchAssetsFunction
+			noItemsText: function() { return $translate.instant('asset.no-assets-text') }
 		};
 			
 		vm.devicesScope = 'customer_user';
@@ -95,7 +93,12 @@ export default function HomeController(types, loginService, userService, deviceS
 		var refreshDevicesParamsFunction = function () {
 			return {"customerId": customerId, "topIndex": vm.topIndex};
 		};
-		
+
+		vm.assetGridConfig.refreshParamsFunc = refreshAssetsParamsFunction;
+		vm.assetGridConfig.fetchItemsFunc = fetchAssetsFunction;
+		vm.deviceGridConfig.refreshParamsFunc = refreshDevicesParamsFunction;
+		vm.deviceGridConfig.fetchItemsFunc = fetchDevicesFunction;
+
 		var getDeviceTitle = function (device) {
 			return device ? device.name : '';
 		}
