@@ -715,6 +715,15 @@ function GridController($scope, $state, $mdDialog, $document, $q, $mdUtil, $time
     function hasData() {
         return vm.items.data.length > 0;
     }
+    
+	vm.openDashboard = function(dashboard) {  
+		$state.go('home.dashboards.dashboard', {dashboardId: dashboard.id.id});
+		/*
+		$state.go('home.customers.dashboards.dashboard', {
+			customerId: vm.currentCustomerId,
+			dashboardId: dashboard.id.id
+		});*/
+	}
 
 }
 

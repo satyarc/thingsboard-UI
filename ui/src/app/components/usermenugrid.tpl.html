@@ -27,8 +27,8 @@
                     <div flex ng-repeat="n in [] | range:vm.columns" ng-style="{'height':vm.itemHeight+'px'}" ng-if="rowItem[n]">
                     	<ul flex layout="column" layout-align="start stretch" class="tb-side-menu">
 					       	<li class="parent-list-item" ng-class="{'tb-current-item': vm.isCurrentItem(rowItem[n])}">
-					          	<md-button ui-sref-active-eq="tb-active"> 	<!-- ui-sref="{{section.state}}"> -->
-									<!--<md-icon aria-label="{{domain}}" class="material-icons">{{domain}}</md-icon>-->	
+					          	<md-button ui-sref-active-eq="tb-active" > 
+									<!--  <md-icon aria-label="{{rowItem[n].name}}" class="material-icons">{{rowItem[n].name}}</md-icon> -->
 									{{rowItem[n].name}}
 								</md-button>
 					       	</li> 
