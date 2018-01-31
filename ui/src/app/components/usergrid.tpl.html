@@ -27,8 +27,6 @@
                     <div flex ng-repeat="n in [] | range:vm.columns" ng-style="{'height':vm.itemHeight+'px'}" ng-if="rowItem[n]">
                     	<ul flex layout="column" layout-align="start stretch" class="tb-side-menu">
 					       	<li class="parent-list-item" ng-class="{'tb-current-item': vm.isCurrentItem(rowItem[n])}">
-					       		<!-- <a ng-href="home.userlinks.dashboard">{{rowItem[n].name}}</a>   -->      		
-					       		<!--<a ng-href ng-click="vm.openDashboard(rowItem[n])">{{rowItem[n].name}}</a>--> 
 					          	<md-button ui-sref-active-eq="tb-active"  ng-click="vm.openDashboard(rowItem[n])"> 
 					          		{{rowItem[n].name}}
 								</md-button>

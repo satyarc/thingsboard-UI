@@ -41,11 +41,17 @@
 	  <md-toolbar ng-show="vm.isCustomerUser()" flex class="tb-side-menu-toolbar" role="navigation"> 
 		  <tb-user-menu-grid grid-configuration="vm.assetGridConfig"></tb-user-menu-grid>  
 	  </md-toolbar>
-	  --> 
+	   
 	  
 	  <md-toolbar ng-show="vm.isCustomerUser()" flex class="tb-side-menu-toolbar" role="navigation"> 
 		  <tb-user-menu-grid grid-configuration="vm.deviceGridConfig"></tb-user-menu-grid> 
 	  </md-toolbar>
+	  -->
+	  
+	  <md-toolbar ng-show="vm.isCustomerUser()" flex class="tb-side-menu-toolbar" role="navigation"> 
+		  <tb-user-menu-grid grid-configuration="vm.dashboardGridConfig"></tb-user-menu-grid> 
+	  </md-toolbar>
+	  
   </md-sidenav>
 
   <div flex layout="column" tabIndex="-1" role="main">

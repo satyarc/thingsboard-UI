@@ -26,7 +26,7 @@ import $ from 'jquery';
 
 /*@ngInject*/
 export default function HomeController(types, loginService, userService, deviceService, Fullscreen, $scope, $element, $rootScope, $document, $state,
-                                       $window, $log, $mdMedia, $animate, $timeout,$stateParams,$translate, customerService,assetService) {
+                                       $window, $log, $mdMedia, $animate, $timeout,$stateParams,$translate, customerService,assetService,dashboardService) {
 
 	var user = userService.getCurrentUser();
 	var authority = user.authority;
@@ -47,13 +47,20 @@ export default function HomeController(types, loginService, userService, deviceS
 		
 		vm.topIndex = 0;
 		
+		vm.dashboardGridConfig = {
+			getItemTitleFunc: getDashboardTitle,
+			parentCtl: vm,
+			onGridInited: gridInited,
+			noItemsText: function() { return $translate.instant('dashboard.no-dashboard-text') }
+		};
+		
 		vm.deviceGridConfig = {
 			getItemTitleFunc: getDeviceTitle,
 			parentCtl: vm,
 			onGridInited: gridInited,
 			noItemsText: function() { return $translate.instant('device.no-devices-text') }
 		};
-		
+				
 		vm.assetGridConfig = {
 			getItemTitleFunc: getAssetTitle,
 			parentCtl: vm,
@@ -63,16 +70,20 @@ export default function HomeController(types, loginService, userService, deviceS
 			
 		vm.devicesScope = 'customer_user';
 		vm.assetsScope = 'customer_user';
+		vm.dashboardsScope = 'customer_user';
+		
 		var customerId = user.customerId;
 		
 		if (customerId) {
 			vm.customerDevicesTitle = $translate.instant('customer.devices'); 
 			vm.customerAssetsTitle = $translate.instant('customer.assets');
+			vm.customerDashboardsTitle = $translate.instant('customer.dashboards');
 			customerService.getShortCustomerInfo(customerId).then(
 				function success(info) {
 					if (info.isPublic) {
 						vm.customerDevicesTitle = $translate.instant('customer.public-devices');
 						vm.customerAssetsTitle = $translate.instant('customer.public-assets');
+						vm.customerDashboardsTitle = $translate.instant('customer.public-dashboards');
 						}
 					}
 			);
@@ -86,6 +97,10 @@ export default function HomeController(types, loginService, userService, deviceS
 			return assetService.getCustomerAssets(customerId, pageLink,true, null, assetType);
 		};
 		
+		var fetchDashboardsFunction = function (pageLink) {
+            return dashboardService.getCustomerDashboards(customerId, pageLink);
+        };
+		
 		var refreshAssetsParamsFunction = function () {
 			return {"customerId": customerId, "topIndex": vm.topIndex};
 		};
@@ -93,11 +108,19 @@ export default function HomeController(types, loginService, userService, deviceS
 		var refreshDevicesParamsFunction = function () {
 			return {"customerId": customerId, "topIndex": vm.topIndex};
 		};
+		
+		var refreshDashboardsParamsFunction = function () {
+			return {"customerId": customerId, "topIndex": vm.topIndex};
+		};
 
 		vm.assetGridConfig.refreshParamsFunc = refreshAssetsParamsFunction;
 		vm.assetGridConfig.fetchItemsFunc = fetchAssetsFunction;
+		
 		vm.deviceGridConfig.refreshParamsFunc = refreshDevicesParamsFunction;
 		vm.deviceGridConfig.fetchItemsFunc = fetchDevicesFunction;
+		
+		vm.dashboardGridConfig.refreshParamsFunc = refreshDashboardsParamsFunction;
+		vm.dashboardGridConfig.fetchItemsFunc = fetchDashboardsFunction;
 
 		var getDeviceTitle = function (device) {
 			return device ? device.name : '';
@@ -105,6 +128,10 @@ export default function HomeController(types, loginService, userService, deviceS
 		
 		var getAssetTitle = function(asset) {
 			return asset ? asset.name : '';
+		}
+		
+		var getDashboardTitle = function(dashboard) {
+			return dashboard ? dashboard.name : '';
 		}
 		
 		var gridInited = function (grid) {
