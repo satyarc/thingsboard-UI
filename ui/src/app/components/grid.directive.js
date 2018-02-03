@@ -320,7 +320,7 @@ function GridController($scope, $state, $mdDialog, $document, $q, $mdUtil, $time
 
         vm.config = vm.gridConfiguration();
 
-        vm.itemHeight = vm.config.itemHeight || 199;
+        vm.itemHeight = vm.config.itemHeight || 40;
 
         vm.refreshParamsFunc = vm.config.refreshParamsFunc || function () {
                 return {"topIndex": vm.topIndex};
