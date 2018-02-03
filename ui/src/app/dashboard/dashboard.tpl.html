@@ -16,12 +16,12 @@
 
 -->
 <md-content flex tb-expand-fullscreen="vm.widgetEditMode || vm.iframeMode || forceFullscreen" expand-button-id="dashboard-expand-button"
-            hide-expand-button="vm.widgetEditMode || vm.iframeMode || forceFullscreen" expand-tooltip-direction="bottom" ng-if="vm.dashboard">
+            hide-expand-button="vm.widgetEditMode || vm.iframeMode || forceFullscreen" expand-tooltip-direction="bottom" ng-if="vm.dashboard">       
     <section class="tb-dashboard-toolbar" ng-show="vm.showDashboardToolbar()"
              ng-class="{ 'tb-dashboard-toolbar-opened': vm.toolbarOpened, 'tb-dashboard-toolbar-closed': !vm.toolbarOpened }">
         <tb-dashboard-toolbar ng-show="!vm.widgetEditMode" force-fullscreen="forceFullscreen"
-                              toolbar-opened="vm.toolbarOpened" on-trigger-click="vm.openToolbar()">
-            <div class="tb-dashboard-action-panels" layout-gt-sm="row" layout-align-gt-sm="space-between center" layout="column" layout-align="center stretch">
+                              toolbar-opened="vm.toolbarOpened" on-trigger-click="vm.openToolbar()" >
+            <div ng-show= "vm.isTenantAdmin() || vm.isSystemAdmin()" class="tb-dashboard-action-panels" layout-gt-sm="row" layout-align-gt-sm="space-between center" layout="column" layout-align="center stretch">
                 <div class="tb-dashboard-action-panel" flex-md="30" layout="row" layout-align-gt-sm="start center" layout-align="space-between center">
                     <md-button ng-show="vm.showCloseToolbar()" aria-label="close-toolbar" class="md-icon-button close-action" ng-click="vm.closeToolbar()">
                         <md-tooltip md-direction="bottom">
@@ -106,7 +106,11 @@
                     </tb-states-component>
                  </div>
             </div>
+            <div ng-show= "vm.isCustomerUser()" class="tb-dashboard-action-panels" layout-gt-sm="row" layout-align-gt-sm="space-between center" layout="column" layout-align="center stretch">
+                <tb-user-grid grid-configuration="vm.dashboardGridConfig"></tb-user-grid>
+            </div>
         </tb-dashboard-toolbar>
+        
     </section>
     <section class="tb-dashboard-container tb-absolute-fill"
              ng-class="{ 'is-fullscreen': forceFullscreen, 'tb-dashboard-toolbar-opened': vm.toolbarOpened, 'tb-dashboard-toolbar-closed': !vm.toolbarOpened }">

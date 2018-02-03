@@ -28,7 +28,7 @@ import AliasController from '../api/alias-controller';
 
 /*@ngInject*/
 export default function DashboardController(types, utils, dashboardUtils, widgetService, userService,
-                                            dashboardService, timeService, entityService, itembuffer, importExport, hotkeys, $window, $rootScope,
+                                            dashboardService, timeService, entityService, customerService, itembuffer, importExport, hotkeys, $window, $rootScope,
                                             $scope, $element, $state, $stateParams, $mdDialog, $mdMedia, $timeout, $document, $q, $translate, $filter) {
 
     var vm = this;
@@ -55,14 +55,65 @@ export default function DashboardController(types, utils, dashboardUtils, widget
     vm.isToolbarOpened = false;
 
     vm.thingsboardVersion = THINGSBOARD_VERSION; //eslint-disable-line
+    
+	vm.dashboardGridConfig = {
+		getItemTitleFunc: getDashboardTitle,
+		parentCtl: vm,
+		onGridInited: gridInited,
+		noItemsText: function() { return $translate.instant('dashboard.no-dashboards-text') }
+	};
+	
+	if (angular.isDefined($stateParams.items) && $stateParams.items !== null) {
+		vm.dashboardGridConfig.items = $stateParams.items;
+	}
+	
+	if (angular.isDefined($stateParams.topIndex) && $stateParams.topIndex > 0) {
+		vm.dashboardGridConfig.topIndex = $stateParams.topIndex;
+	}
+	
+	vm.dashboardsScope = $state.$current.data.dashboardsType;
+	vm.user = userService.getCurrentUser();
+	
+	vm.dashboardsScope = 'customer_user';
+	vm.currentCustomerId = vm.user.customerId;
+	
+	if (vm.currentCustomerId) {
+		vm.customerDashboardsTitle = $translate.instant('customer.dashboards');
+		customerService.getShortCustomerInfo(vm.currentCustomerId).then(
+			function success(info) {
+				if (info.isPublic) {
+					vm.customerDashboardsTitle = $translate.instant('customer.public-dashboards');
+				}
+			}
+		);
+	}
+	
+	var fetchDashboardsFunction = function (pageLink) {
+		return dashboardService.getCustomerDashboards(vm.currentCustomerId, pageLink);
+	};
+	
+	var refreshDashboardsParamsFunction = function () {
+		return {"customerId": vm.currentCustomerId, "topIndex": vm.topIndex};
+	};
+	
+	vm.dashboardGridConfig.refreshParamsFunc = refreshDashboardsParamsFunction;
+	vm.dashboardGridConfig.fetchItemsFunc = fetchDashboardsFunction;
+	
+	function getDashboardTitle(dashboard) {
+		return dashboard ? dashboard.title : '';
+	}
+	
+	function gridInited(grid) {
+		vm.grid = grid;
+	}
 
     vm.currentDashboardId = $stateParams.dashboardId;
     if ($stateParams.customerId) {
-        vm.currentCustomerId = $stateParams.customerId;
-        vm.currentDashboardScope = 'customer';
+		vm.currentCustomerId = $stateParams.customerId;
+		vm.currentDashboardScope = 'customer';
     } else {
-        vm.currentDashboardScope = vm.user.authority === 'TENANT_ADMIN' ? 'tenant' : 'customer';
-        vm.currentCustomerId = vm.user.customerId;
+		vm.currentDashboardScope = vm.user.authority === 'TENANT_ADMIN' ? 'tenant' : 'customer';
+		vm.currentCustomerId = vm.user.customerId;
     }
 
     Object.defineProperty(vm, 'toolbarOpened', {
@@ -117,7 +168,8 @@ export default function DashboardController(types, utils, dashboardUtils, widget
         return !vm.toolbarAlwaysOpen() && !vm.isEdit && !vm.showRightLayoutSwitch();
     }
 
-    vm.toolbarAlwaysOpen = toolbarAlwaysOpen;
+    //vm.toolbarAlwaysOpen = toolbarAlwaysOpen;
+	vm.toolbarAlwaysOpen = true;
 
     vm.showRightLayoutSwitch = function() {
         return vm.isMobile && vm.layouts.right.show;
@@ -177,6 +229,7 @@ export default function DashboardController(types, utils, dashboardUtils, widget
     vm.isPublicUser = isPublicUser;
     vm.isTenantAdmin = isTenantAdmin;
     vm.isSystemAdmin = isSystemAdmin;
+    vm.isCustomerUser = isCustomerUser;
     vm.dashboardConfigurationError = dashboardConfigurationError;
     vm.showDashboardToolbar = showDashboardToolbar;
     vm.onAddWidgetClosed = onAddWidgetClosed;
@@ -436,11 +489,16 @@ export default function DashboardController(types, utils, dashboardUtils, widget
         return vm.user.authority === 'SYS_ADMIN';
     }
 
+    function isCustomerUser() {
+        return vm.user.authority === 'CUSTOMER_USER';
+    }
+    
     function dashboardConfigurationError() {
         return vm.configurationError;
     }
 
     function showDashboardToolbar() {
+
         return true;
     }
 
@@ -1031,20 +1089,6 @@ export default function DashboardController(types, utils, dashboardUtils, widget
         setEditMode(false, false);
         notifyDashboardUpdated();
     }
-
-/*    function showAliasesResolutionError(error) {
-        var alert = $mdDialog.alert()
-            .parent(angular.element($document[0].body))
-            .clickOutsideToClose(true)
-            .title($translate.instant('dashboard.alias-resolution-error-title'))
-            .htmlContent($translate.instant(error))
-            .ariaLabel($translate.instant('dashboard.alias-resolution-error-title'))
-            .ok($translate.instant('action.close'))
-        alert._options.skipHide = true;
-        alert._options.fullscreen = true;
-
-        $mdDialog.show(alert);
-    }*/
 
     function entityAliasesUpdated() {
         vm.dashboardCtx.aliasController.updateEntityAliases(vm.dashboard.configuration.entityAliases);
