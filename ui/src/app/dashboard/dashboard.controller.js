@@ -52,7 +52,7 @@ export default function DashboardController(types, utils, dashboardUtils, widget
     vm.widgetEditMode = $state.$current.data.widgetEditMode;
     vm.iframeMode = $rootScope.iframeMode;
 
-    vm.isToolbarOpened = false;
+    //vm.isToolbarOpened = false;
 
     vm.thingsboardVersion = THINGSBOARD_VERSION; //eslint-disable-line
     
