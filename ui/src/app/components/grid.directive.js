@@ -155,7 +155,8 @@ function UserMenuGrid() {
 }
 
 /*@ngInject*/
-function GridController($scope, $state, $mdDialog, $document, $q, $mdUtil, $timeout, $translate, $mdMedia, $templateCache, $window) {
+function GridController($scope, $state, $mdDialog, $document, $q, $mdUtil,
+		$timeout, $translate, $mdMedia, $templateCache, $window, userService) {
 
     var vm = this;
 
@@ -320,7 +321,11 @@ function GridController($scope, $state, $mdDialog, $document, $q, $mdUtil, $time
 
         vm.config = vm.gridConfiguration();
 
-        vm.itemHeight = vm.config.itemHeight || 40;
+		if(userService.getCurrentUser().authority === 'CUSTOMER_USER'){
+			vm.itemHeight = 40;
+		}else{
+			vm.itemHeight = vm.config.itemHeight || 199;
+		}
 
         vm.refreshParamsFunc = vm.config.refreshParamsFunc || function () {
                 return {"topIndex": vm.topIndex};
