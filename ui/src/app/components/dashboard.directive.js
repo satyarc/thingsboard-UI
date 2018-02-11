@@ -150,15 +150,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
         maxSizeY: 'widget.maxSizeY'
     };
 
-    /*vm.widgetItemMap = {
-        sizeX: 'vm.widgetSizeX(widget)',
-        sizeY: 'vm.widgetSizeY(widget)',
-        row: 'vm.widgetRow(widget)',
-        col: 'vm.widgetCol(widget)',
-        minSizeY: 'widget.minSizeY',
-        maxSizeY: 'widget.maxSizeY'
-    };*/
-
     vm.isWidgetExpanded = false;
     vm.isHighlighted = isHighlighted;
     vm.isNotHighlighted = isNotHighlighted;
@@ -296,16 +287,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
         }
     }
 
-
-    //TODO: widgets visibility
-    /*gridsterParent.scroll(function () {
-        updateVisibleRect();
-    });
-
-    gridsterParent.resize(function () {
-        updateVisibleRect();
-    });*/
-
     function updateMobileOpts() {
         var isMobileDisabled = vm.isMobileDisabled === true;
         var isMobile = vm.isMobile === true && !isMobileDisabled;
@@ -373,8 +354,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
                 vm.gridster.columns = vm.columns;
                 updateGridsterParams();
             }
-            //TODO: widgets visibility
-            //updateVisibleRect();
         }
     });
 
@@ -387,8 +366,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
                 vm.gridster.margins = vm.margins;
                 updateGridsterParams();
             }
-            //TODO: widgets visibility
-            //updateVisibleRect();
         }
     });
 
@@ -408,8 +385,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
         if (checkIsLocalGridsterElement(theGridster)) {
             vm.gridster = theGridster;
             vm.isResizing = false;
-            //TODO: widgets visibility
-            //updateVisibleRect(false, true);
         }
     });
 
@@ -425,11 +400,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
                 }
             );
             vm.isMobileSize = checkIsMobileSize();
-
-            //TODO: widgets visibility
-            /*$timeout(function () {
-                updateVisibleRect(true);
-            }, 500, false);*/
         }
     });
 
@@ -569,47 +539,6 @@ function DashboardController($scope, $rootScope, $element, $timeout, $mdMedia, $
             }
         }
     }
-
-    //TODO: widgets visibility
-    /*function updateVisibleRect (force, containerResized) {
-        if (vm.gridster) {
-            var position = $(vm.gridster.$element).position()
-            if (position) {
-                var viewportWidth = gridsterParent.width();
-                var viewportHeight = gridsterParent.height();
-                var top = -position.top;
-                var bottom = top + viewportHeight;
-                var left = -position.left;
-                var right = left + viewportWidth;
-
-                var newVisibleRect = {
-                    top: vm.gridster.pixelsToRows(top),
-                    topPx: top,
-                    bottom: vm.gridster.pixelsToRows(bottom),
-                    bottomPx: bottom,
-                    left: vm.gridster.pixelsToColumns(left),
-                    right: vm.gridster.pixelsToColumns(right),
-                    isMobile: vm.gridster.isMobile,
-                    curRowHeight: vm.gridster.curRowHeight,
-                    containerResized: containerResized
-                };
-
-                if (force ||
-                    newVisibleRect.top != vm.visibleRect.top ||
-                    newVisibleRect.topPx != vm.visibleRect.topPx ||
-                    newVisibleRect.bottom != vm.visibleRect.bottom ||
-                    newVisibleRect.bottomPx != vm.visibleRect.bottomPx ||
-                    newVisibleRect.left != vm.visibleRect.left ||
-                    newVisibleRect.right != vm.visibleRect.right ||
-                    newVisibleRect.isMobile != vm.visibleRect.isMobile ||
-                    newVisibleRect.curRowHeight != vm.visibleRect.curRowHeight ||
-                    newVisibleRect.containerResized != vm.visibleRect.containerResized) {
-                    vm.visibleRect = newVisibleRect;
-                    $scope.$broadcast('visibleRectChanged', vm.visibleRect);
-                }
-            }
-        }
-    }*/
 
     function checkIsLocalGridsterElement (gridster) {
         return gridsterElement && gridsterElement[0] === gridster.$element[0];

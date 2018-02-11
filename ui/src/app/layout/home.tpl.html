@@ -64,7 +64,7 @@
 		      </md-button>
 			  <md-button ng-show="forceFullscreen"
 					   class="md-icon-button" aria-label="{{ 'action.back' | translate }}" ng-click="vm.goBack()" ng-class="{'tb-invisible': vm.displaySearchMode()}">
-				  <md-icon aria-label="{{ 'action.back' | translate }}" class="material-icons">arrow_back</md-icon>
+				  <md-icon aria-label="{{ 'action.back' |   }}" class="material-icons">arrow_back</md-icon>
 			  </md-button>
 	          <md-button class="md-icon-button" aria-label="{{ 'action.back' | translate }}" ng-click="vm.closeSearch()" ng-class="{'tb-invisible': !vm.displaySearchMode()}" >
 		      	  <md-icon aria-label="{{ 'action.back' | translate }}" class="material-icons">arrow_back</md-icon>
@@ -90,16 +90,25 @@
 		      <md-button ng-show="!vm.displaySearchMode()" hide-xs hide-sm class="md-icon-button" ng-click="vm.toggleFullscreen()" aria-label="{{ 'fullscreen.toggle' | translate }}">
 	    			<ng-md-icon icon="{{vm.Fullscreen.isEnabled() ? 'fullscreen_exit' : 'fullscreen'}}" options='{"easing": "circ-in-out", "duration": 375, "rotation": "none"}'></ng-md-icon>
 		      </md-button>
-		       
 			  <tb-user-menu
 					  display-user-info="!vm.displaySearchMode()">
 			  </tb-user-menu>
-			  
       	</div>
     </md-toolbar>
    	<md-progress-linear class="md-warn" style="z-index: 10; max-height: 0px; width: 100%;" md-mode="indeterminate" ng-disabled="!loading" ng-show="loading"></md-progress-linear>
-    
-    <div flex layout="column" id="toast-parent" style="position: relative;">
-    	<md-content ng-cloak flex layout="column" class="page-content" ui-view name="content"></md-content>
+   	<table md-table ng-show="vm.isCustomerUser()" class="table" show-filter="true">
+    	<tbody md-body>
+    		<tr md-row >
+		        <td md-cell title="'Error Code'"><h3>Error Codes</h3></td>
+		        <td md-cell title="'Error Code'"><h3>Description</h3></td>
+		    </tr>
+		    <tr md-row ng-repeat="error in vm.deviceErrorData">
+		        <td md-cell title="'Error Code'">{{error.errorcode}}</td>
+		        <td md-cell title="'Description'">{{error.description}}</td>
+		    </tr>
+		</tbody>
+	</table>
+    <div flex layout="row" id="toast-parent" style="position: relative;">
+		<md-content ng-cloak flex layout="column" class="page-content" ui-view name="content"></md-content>
     </div>
   </div>

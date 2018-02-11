@@ -45,6 +45,11 @@ export default function HomeController(types, loginService, userService, deviceS
     
 	if(authority === 'CUSTOMER_USER'){
 		
+		vm.deviceErrorData = [	{errorcode: "400", description: "Device not found"},
+								{errorcode: "401", description: "Device not connected"},
+								{errorcode: "402", description: "Device not Switched ON"},
+								{errorcode: "403", description: "Device not Working"}];
+				
 		vm.topIndex = 0;
 		
 		vm.dashboardGridConfig = {
